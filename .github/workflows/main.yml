@@ -46,13 +46,14 @@ jobs:
       - name: Run test
         run: |
           echo --- Running test cases ---
-          docker-compose -f ./<REPO_NAME>/docker-compose.test-github.yml -p testing up --build --exit-code-from api-test
+          docker-compose -f ./CYBR8470-building-a-webservice-lab/docker-compose.yml -p testing up --build --exit-code-from api-test
           echo --- Completed test cases ---
         
       - name: Extract commit
         shell: bash
         run: |
           echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+          
       - name: Get branch name (merge)
         if: github.event_name != 'pull_request'
         shell: bash
@@ -62,7 +63,6 @@ jobs:
         if: github.event_name == 'pull_request'
         shell: bash
         run: echo "BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
-
 
       - name: Send slack notification
         if: always()
