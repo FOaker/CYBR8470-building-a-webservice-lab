@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-            path: "CYBR8470"
+            path: "CYBR8470-building-a-webservice-lab"
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -40,7 +40,7 @@ jobs:
       - name: Build docker
         run: | 
           echo ---Building and starting up docker---
-          docker-compose -f ./CYBR8470/docker-compose.test.yml -p testing up -d
+          docker-compose -f ./CYBR8470-building-a-webservice-lab/docker-compose.test.yml -p testing up -d
           echo ---Containers up---
           
       - name: Run test
